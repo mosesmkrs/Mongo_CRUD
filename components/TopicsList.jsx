@@ -1,13 +1,10 @@
-"use client";
-
 import Link from "next/link";
 import RemoveBtn from "./RemoveBtn";
 import { HiPencilAlt } from "react-icons/hi";
-import { useEffect, useState } from "react";
 
 const getTopics = async () => {
   try {
-    const res = await fetch("https://mongo-crud-alpha.vercel.app/api/topics/", {
+    const res = await fetch("https://mongo-crud-alpha.vercel.app/api/topics", {
       cache: "no-store",
     });
 
@@ -15,28 +12,14 @@ const getTopics = async () => {
       throw new Error("Failed to fetch topics");
     }
 
-    const data = await res.json();
-    // Ensure the API response structure matches what you're returning here
-    return { topics: data.topics || data };
+    return res.json();
   } catch (error) {
     console.log("Error loading topics: ", error);
-    return { topics: [] };
   }
 };
 
-export default function TopicsList() {
-  const [topics, setTopics] = useState([]);
-
-  useEffect(() => {
-    const fetchTopics = async () => {
-      const result = await getTopics();
-      if (result && result.topics) {
-        setTopics(result.topics);
-      }
-    };
-
-    fetchTopics();
-  }, []);
+export default async function TopicsList() {
+  const topics = await getTopics();
 
   return (
     <>
