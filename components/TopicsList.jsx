@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import RemoveBtn from "./RemoveBtn";
 import { HiPencilAlt } from "react-icons/hi";
+import { useEffect, useState } from "react";
 
 const getTopics = async () => {
   try {
@@ -19,7 +22,16 @@ const getTopics = async () => {
 };
 
 export default async function TopicsList() {
-  const { topics } = await getTopics();
+  const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    const fetchTopics = async () => {
+      const { topics } = await getTopics();
+      setTopics(topics);
+    };
+
+    fetchTopics();
+  }, []);
 
   return (
     <>
