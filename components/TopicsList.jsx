@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const getTopics = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/topics/", {
+    const res = await fetch("https://mongo-crud-alpha.vercel.app/api/topics/", {
       cache: "no-store",
     });
 
