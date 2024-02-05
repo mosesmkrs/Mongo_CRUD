@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import RemoveBtn from "./RemoveBtn";
 import { HiPencilAlt } from "react-icons/hi";
+import { useEffect, useState } from "react";
 
 const getTopics = async () => {
   try {
@@ -12,14 +15,28 @@ const getTopics = async () => {
       throw new Error("Failed to fetch topics");
     }
 
-    return res.json();
+    const data = await res.json();
+    // Ensure the API response structure matches what you're returning here
+    return { topics: data.topics || data };
   } catch (error) {
     console.log("Error loading topics: ", error);
+    return { topics: [] };
   }
 };
 
-export default async function TopicsList() {
-  const { topics } = await getTopics();
+export default function TopicsList() {
+  const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    const fetchTopics = async () => {
+      const result = await getTopics();
+      if (result && result.topics) {
+        setTopics(result.topics);
+      }
+    };
+
+    fetchTopics();
+  }, []);
 
   return (
     <>
