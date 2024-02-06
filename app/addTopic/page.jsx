@@ -18,7 +18,7 @@ export default function AddTopic() {
     }
 
     try {
-      const res = await fetch(process.env.API, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/api/topics`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -32,7 +32,7 @@ export default function AddTopic() {
         throw new Error("Failed to create a topic");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error, "........///");
     }
   };
 

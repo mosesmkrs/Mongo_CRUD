@@ -9,9 +9,12 @@ export default function RemoveBtn({ id }) {
     const confirmed = confirm("Are you sure?");
 
     if (confirmed) {
-      const res = await fetch(`${process.env.API}?id=${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/api/topics?id=${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (res.ok) {
         router.refresh();
