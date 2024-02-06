@@ -18,16 +18,13 @@ export default function AddTopic() {
     }
 
     try {
-      const res = await fetch(
-        "https://mongo-crud-alpha.vercel.app/api/topics/",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({ title, description }),
-        }
-      );
+      const res = await fetch(process.env.API, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ title, description }),
+      });
 
       if (res.ok) {
         router.push("/");

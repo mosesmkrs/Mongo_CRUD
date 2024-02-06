@@ -2,7 +2,7 @@ import EditTopicForm from "@/components/EditTopicForm";
 
 const getTopicById = async (id) => {
   try {
-    const res = await fetch(`https://mongo-crud-alpha.vercel.app/api/topics/${id}`, {
+    const res = await fetch(`${process.env.API}/${id}`, {
       cache: "no-store",
     });
 

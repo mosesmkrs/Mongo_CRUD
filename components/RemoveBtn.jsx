@@ -9,12 +9,9 @@ export default function RemoveBtn({ id }) {
     const confirmed = confirm("Are you sure?");
 
     if (confirmed) {
-      const res = await fetch(
-        `https://mongo-crud-alpha.vercel.app/api/topics?id=${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const res = await fetch(`${process.env.API}?id=${id}`, {
+        method: "DELETE",
+      });
 
       if (res.ok) {
         router.refresh();
